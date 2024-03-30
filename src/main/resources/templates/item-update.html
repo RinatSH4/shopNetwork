@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование товара</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" href="https://img.icons8.com/?size=48&id=Oi6NZDZTenrC&format=png" type="image/x-icon">
+</head>
+
+<body>
+
+
+<div th:replace="~{/layouts/header :: header}"></div>
+
+
+<h4>Редактирование товара</h4><br>
+    <div class="container">
+        <form method="post" th:action="'/item/' + ${item.id} + '/update'" enctype="multipart/form-data">
+            <h5>название:</h5>
+            <input type="text" name="title" th:value="${item.title}">
+            <h5>описание товара:</h5>
+            <textarea rows="10" name="info" th:text="${item.info}" id="textarea"></textarea>
+            <h5>фото:</h5>
+            <input type="file" name="image"><br>
+            <h5>цена:</h5>
+            <input type="number" th:value="${item.price}" name="price"> <br>
+            <h5>количество:</h5>
+            <input type="number" th:value="${item.count}" name="price"> <br>
+            <br>
+            <button type="submit" id="regbutton">Изменить</button>
+        </form>
+    </div>
+
+<div class="container">
+    <span th:if="${item.enabled}">
+            <a th:href="'/item/' + ${item.id} + '/setenablefalse'"><button type="submit">Снять с продажи</button></a>
+        </span>
+    <span th:if="${!item.enabled}">
+            <a th:href="'/item/' + ${item.id} + '/setenabletrue'"><button type="submit">Возобновить продажу</button></a>
+        </span>
+</div>
+<br><br><br><br><br><br>
+    <div th:replace="~{/layouts/footer :: footer}"></div>
+</body>
+
+</html>
